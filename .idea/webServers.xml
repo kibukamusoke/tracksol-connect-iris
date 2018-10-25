@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f0c01fe4-f9d9-48ca-869d-4c02b2080a19" name="development-box-1" url="http://tdocker-my">
+        <fileTransfer host="tdocker-my" port="22" rootFolder="/home/connect/containers/client-websites/development-box-1/public_html" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

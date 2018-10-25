@@ -1,0 +1,84 @@
+RewriteEngine on
+
+<filesMatch "\.(html|htm|js|css)$">
+  FileETag None
+  <ifModule mod_headers.c>
+     Header unset ETag
+     Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+     Header set Pragma "no-cache"
+     Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+  </ifModule>
+</filesMatch>
+
+
+RewriteRule ^dashboard$ index.php
+RewriteRule ^icard/(.*)/modify$ icard.php?cardNo=$1&action=modify
+
+# customer routes
+RewriteRule ^customers$ pages/customer/customers.php
+RewriteRule ^customers/res/(.*)/(.*)?$ pages/customer/customers.php?success=$1&message=$2
+RewriteRule ^customers/(.*)/(.*)$ pages/customer/customers.php?idx=$1&action=$2
+RewriteRule ^icustomer/(.*)/modify$ pages/customer/icustomer.php?idx=$1&action=modify
+
+# store routes
+RewriteRule ^stock$ pages/store/stock.php
+RewriteRule ^istock$ pages/store/istock.php
+RewriteRule ^stock/res/(.*)/(.*)?$ pages/store/stock.php?success=$1&message=$2
+RewriteRule ^stock/(.*)/(.*)$ pages/store/stock.php?idx=$1&action=$2
+RewriteRule ^istock/(.*)/modify$ pages/store/istock.php?idx=$1&action=modify
+RewriteRule ^stock-movement$ pages/store/stock_movement.php
+
+RewriteRule ^stores$ pages/store/stores.php
+RewriteRule ^istore$ pages/store/istore.php
+RewriteRule ^istore/(.*)/modify$ pages/store/istore.php?idx=$1&action=modify
+RewriteRule ^stores/res/(.*)/(.*)?$ pages/store/stores.php?success=$1&message=$2
+RewriteRule ^stores/(.*)/(.*)$ pages/store/stores.php?idx=$1&action=$2
+
+RewriteRule ^category$ pages/store/category.php
+RewriteRule ^icategory$ pages/store/icategory.php
+RewriteRule ^category/res/(.*)/(.*)?$ pages/store/category.php?success=$1&message=$2
+RewriteRule ^category/(.*)/(.*)$ pages/store/category.php?idx=$1&action=$2
+RewriteRule ^icategory/(.*)/modify$ pages/store/icategory.php?idx=$1&action=modify
+
+#staff routes
+RewriteRule ^staff pages/staff/staff.php
+RewriteRule ^istaff$ pages/staff/istaff.php
+RewriteRule ^istaff/(.*)/modify$ pages/staff/istaff.php?idx=$1&action=modify
+RewriteRule ^staff/res/(.*)/(.*)?$ pages/staff/staff.php?success=$1&message=$2
+RewriteRule ^staff/(.*)/(.*)$ pages/staff/staff.php?idx=$1&action=$2
+RewriteRule ^attendance$ pages/staff/attendance.php
+
+#customer routes
+RewriteRule ^customers pages/customer/customers.php
+RewriteRule ^icustomer$ pages/customer/icustomer.php
+RewriteRule ^icustomer/(.*)/modify$ pages/customer/icustomer.php?idx=$1&action=modify
+RewriteRule ^customers/res/(.*)/(.*)?$ pages/customer/customers.php?success=$1&message=$2
+RewriteRule ^customers/(.*)/(.*)$ pages/customer/customers.php?idx=$1&action=$2
+
+#supplier routes
+RewriteRule ^suppliers pages/supplier/suppliers.php
+RewriteRule ^isupplier$ pages/supplier/isupplier.php
+RewriteRule ^isupplier/(.*)/modify$ pages/suppliers/isupplier.php?idx=$1&action=modify
+RewriteRule ^suppliers/res/(.*)/(.*)?$ pages/supplier/suppliers.php?success=$1&message=$2
+RewriteRule ^suppliers/(.*)/(.*)$ pages/supplier/suppliers.php?idx=$1&action=$2
+
+
+#sales routes
+RewriteRule ^sales-transactions$ pages/sales/transactions.php
+RewriteRule ^payment_modes pages/sales/payment_modes.php
+RewriteRule ^ipayment_mode$ pages/sales/ipayment_mode.php
+RewriteRule ^ipayment_mode/(.*)/modify$ pages/sales/ipayment_mode.php?idx=$1&action=modify
+RewriteRule ^payment_modes/res/(.*)/(.*)?$ pages/sales/payment_modes.php?success=$1&message=$2
+RewriteRule ^payment_modes/(.*)/(.*)$ pages/sales/payment_modes.php?idx=$1&action=$2
+
+#api routes
+RewriteRule ^terminal/(.*)/(.*)$ api/terminal.php?tmn_hw_id=$1&action_id=$2
+RewriteRule ^terminal/(.*)$ api/terminal.php?action_id=$1
+
+#internal api routes
+RewriteRule ^internal/(.*)$ api/internalAPI.php?action=$1
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+
+RewriteRule ^(.*)$ $1.php [NC,L]
