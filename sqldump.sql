@@ -1,3 +1,6 @@
+CREATE DATABASE Connect;
+GO;
+
 -- we don't know how to generate schema Connect (class Schema) :(
 create table if not exists attendance_log
 (
